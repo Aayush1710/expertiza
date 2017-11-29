@@ -29,6 +29,10 @@
             <%= users_for_curr_team.html_safe %>
           </td>
           <td>
+            <!--render partial-->
+            <%expected_id =
+            <% map = current_user.assignment_participation.
+            <%= render :partial => 'responses'%>
             <% assignment = Assignment.find(params[:id]) rescue nil %>
             <% instructor = Participant.where(parent_id: params[:id], user_id: session[:user].id).first %>
             <% maps = ReviewResponseMap.where(reviewed_object_id: params[:id], reviewer_id: instructor.id, reviewee_id: team.id, expert_review_to: true) rescue nil %>
