@@ -1,15 +1,12 @@
 <%@sorted_responses=[]%>
 <%- # ACS Have metareviews done for all teams   -%>
 <%- # removed code that handles team and individual assignments differently   -%>
-<% if map.type.to_s == "MetareviewResponseMap" %>
-    <% review_mapping = ResponseMap.find(map.reviewed_object_id) %>
-    <% participant = AssignmentTeam.get_first_member(review_mapping.reviewee_id) %>
-<% else %>
-    <% participant = AssignmentTeam.get_first_member(map.reviewee_id) %>
-<% end %>
+    #review_mapping = ResponseMap.where(reviewed_object_id:_@reviewed_object_id).first
+    #participant = AssignmentTeam.get_first_member(@reviewee_id)
+    <% participant = Participant.where(user_id: TeamsUser.where(team_id: @reviewee_id).first.user_id).first %>
 
 <% if participant %>
-    <% topic_id = SignedUpTeam.topic_id(participant.parent_id, participant.user_id) %>
+    <% topic_id = SignedUpTeam.topic_id(@reviewed_object_id, participant.user_id) %>
     <tr>
       <td>
         <b><%= "#{title} #{review_no}." %></b>
